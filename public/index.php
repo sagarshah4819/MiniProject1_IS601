@@ -73,6 +73,23 @@ class html_body{
     }
 }
 
+// create table rows
+class create_table_Rows{
+
+    public static function open_tableRow(){
+        return '<tr>';
+    }
+    public static function close_tableRow(){
+        return '</tr>';
+    }
+}
+
+// get table data
+class tableData{
+    public static function printTabledata ($value){
+        return '<td>'. $value . '</td>';
+    }
+}
 
 
 class csv{
