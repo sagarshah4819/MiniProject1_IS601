@@ -9,8 +9,37 @@ class main {
 
         $records = csv :: getRecords($filename);
 
+        $table = html::generateTable($records);
+
+    }
+
+}
+
+class html
+{
+
+    public static function generateTable($records)
+    {
+
+        $html = '<html>';
+
+        $html .= html_table::openhtmlTable();
+
+        $html .= html_table::closehtmlTable();
     }
 }
+
+
+class html_table{
+    public static function openhtmlTable(){
+        return '<table class="table table-bordered">';
+    }
+    public static function closehtmlTable(){
+        return '</table>';
+    }
+}
+
+
 
 class csv{
 
@@ -51,7 +80,13 @@ class record{
            $this->createProperty($property, $value);
 
        }
-       print_r($this);
+
+    }
+
+    public function returnArray()
+    {
+        $array=(array) $this;
+        return $array;
     }
 
     public function createProperty($name = "FirstName", $value="Sagar")
@@ -60,6 +95,7 @@ class record{
         $this->{$name} = $value;
 
     }
+
 }
 
 class recordFactory{
