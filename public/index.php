@@ -113,7 +113,7 @@ class html_header{
 
 class html_table{
     public static function openhtmlTable(){
-        return '<table class="table table-bordered">';
+        return '<table class="table table-bordered  table table-striped">';
     }
     public static function closehtmlTable(){
         return '</table>';
