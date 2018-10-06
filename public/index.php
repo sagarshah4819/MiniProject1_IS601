@@ -8,7 +8,8 @@ class main {
     {
 
         $records = csv :: getRecords($filename);
-        print_r($records);
+        $record = recordFactory :: create();
+        print_r($record);
 
     }
 }
@@ -28,4 +29,17 @@ class csv{
         fclose($file);
         return $records;
     }
+}
+
+class record{}
+
+class recordFactory{
+
+    public static function create(Array $array = null){
+
+        $record = new record();
+        return $record;
+
+}
+
 }
