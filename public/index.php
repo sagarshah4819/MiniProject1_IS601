@@ -24,9 +24,15 @@ class html
         $html = '<html>';
 
         $html .= html_header::getHtmlHeader();
+        $html .= html_body::open_HtmlBody() ;
         $html .= html_table::openhtmlTable();
 
         $html .= html_table::closehtmlTable();
+        $html .= html_body::close_HtmlBody() ;
+        $html .= '</html>';
+
+        return $html;
+
     }
 }
 
@@ -54,6 +60,16 @@ class html_table{
     }
     public static function closehtmlTable(){
         return '</table>';
+    }
+}
+
+class html_body{
+
+    public static function open_HtmlBody(){
+        return '<body>';
+    }
+    public static function close_HtmlBody(){
+        return '</body>';
     }
 }
 
