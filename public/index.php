@@ -18,11 +18,21 @@ class csv{
     {
         $file = fopen($filename, "r");
 
+        $fieldNames = array();
+        $count = 0;
+
         while(!feof($file)){
 
             $record = fgetcsv($file);
-            $records[] = recordFactory::create($record);
-
+            if($count == 0)
+            {
+                $fieldNames = $record;
+            }
+            else
+            {
+                $records[] = recordFactory::create($fieldNames, $record);
+            }
+            $count++;
         }
         fclose($file);
         return $records;
@@ -48,9 +58,11 @@ class record{
 
 class recordFactory{
 
-    public static function create(Array $array = null){
+    public static function create(Array $fieldNames = null, Array $record = null){
 
-        $record = new record($array);
+        print_r($fieldNames);
+        print_r($record);
+        //$record = new record($array);
         return $record;
 
 }
