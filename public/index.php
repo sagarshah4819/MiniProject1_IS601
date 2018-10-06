@@ -1,20 +1,31 @@
 <?php
 
-main::start();
+main::start("TestFile.csv");
 
 class main {
 
-    static public function start()
+    static public function start($filename)
     {
 
-        $file = fopen("TestFile.csv", "r");
+        $records = csv :: getRecords($filename);
+        print_r($records);
 
-        while (!feof($file)) {
+    }
+}
+
+class csv{
+
+    public static function getRecords($filename)
+    {
+        $file = fopen($filename, "r");
+
+        while(!feof($file)){
 
             $record = fgetcsv($file);
             $records[] = $record;
+
         }
-    fclose($file);
-    print_r($records);
+        fclose($file);
+        return $records;
     }
 }
