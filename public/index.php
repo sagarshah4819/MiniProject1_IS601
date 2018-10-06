@@ -11,7 +11,8 @@ class main {
 
         $table = html::generateTable($records);
 
-        echo $table;
+        printTable::display_table_data($table);
+
     }
 
 }
@@ -41,14 +42,12 @@ class html
                 $array = $record->returnArray();
                 $fields = array_keys($array);
                 $values = array_values($array);
-//            print_r($fields);
-//            print_r($values);
+
                 foreach($fields as  $value) {
                     $html .= create_table_Header::createHeader($value);
                 }
-//            $html .= '</tr>';
+
                 $html .= html_tableHead::close_TableHead();
-//            $html .= create_table_Rows::open_tableRow();
 
                 foreach($values as  $value2){
                     $html .= tableData::printTabledata($value2);
@@ -208,7 +207,7 @@ class record{
         return $array;
     }
 
-    public function createProperty($name = "FirstName", $value="Sagar")
+    public function createProperty($name , $value)
     {
 
         $this->{$name} = $value;
@@ -227,4 +226,12 @@ class recordFactory{
 
     }
 
+}
+
+class printTable{
+    public static function display_table_data($table){
+
+        echo $table;
+
+    }
 }
