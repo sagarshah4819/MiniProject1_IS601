@@ -26,63 +26,79 @@ class html
         $html = '<html>';
 
         $html .= html_header::getHtmlHeader();
-        $html .= html_body::open_HtmlBody() ;
+        $html .= html_body::open_HtmlBody();
         $html .= html_table::openhtmlTable();
 
-        $count =0;
+        $count = 0;
 
 
-        foreach ($records as $record){
+        foreach ($records as $record) {
 
-            if($count == 0){
+            /* if($count == 0)
+            {
+                 $html .= html_tableHead::open_TableHead();
+
+                 $html .= create_table_Rows::open_tableRow();
+
+                 $array = $record->returnArray();
+                 $fields = array_keys($array);
+                 $values = array_values($array);
+
+               /*  foreach($fields as  $value) {
+                     $html .= create_table_Header::createHeader($value);
+                 }
+
+                 $html .= html_tableHead::close_TableHead();
+
+                 foreach($values as  $value2){
+                     $html .= tableData::printTabledata($value2);
+                 }
+
+                 $html .= create_table_Rows::close_tableRow();
+
+
+             } else
+               {
+
+                 $array = $record->returnArray();
+                 $values = array_values($array);
+                 $html .= create_table_Rows::open_tableRow();
+
+                 foreach($values as  $value2)
+               {
+                     $html .= tableData::printTabledata($value2);
+                 }
+
+                 $html .= create_table_Rows::close_tableRow();
+
+                }
+
+             $count++;*/
+
+            $array = $record->returnArray();
+            $fields = array_keys($array);
+            $values = array_values($array);
+            while ($count == 0) {
                 $html .= html_tableHead::open_TableHead();
-
                 $html .= create_table_Rows::open_tableRow();
-
-                $array = $record->returnArray();
-                $fields = array_keys($array);
-                $values = array_values($array);
-
-                foreach($fields as  $value) {
-                    $html .= create_table_Header::createHeader($value);
-                }
-
+                $html .= helper::loopingIt($fields, 0);
+                $html .= create_table_Rows::close_tableRow();
                 $html .= html_tableHead::close_TableHead();
-
-                foreach($values as  $value2){
-                    $html .= tableData::printTabledata($value2);
-                }
-
-                $html .= create_table_Rows::close_tableRow();
-
-
-            } else {
-
-                $array = $record->returnArray();
-                $values = array_values($array);
-                $html .= create_table_Rows::open_tableRow();
-
-                foreach($values as  $value2){
-                    $html .= tableData::printTabledata($value2);
-                }
-
-                $html .= create_table_Rows::close_tableRow();
-
+                $count++;
             }
-
-            $count++;
-
+            $html .= create_table_Rows::open_tableRow();
+            $html .= helper::loopingIt($values, 1);
+            $html .= create_table_Rows::close_tableRow();
         }
-
-
-        $html .= html_table::closehtmlTable();
-        $html .= html_body::close_HtmlBody() ;
-        $html .= '</html>';
-
-        return $html;
+            //Finish table and return
+            $html .= html_table::closehtmlTable();
+            $html .= html_body::close_HtmlBody();
+            $html .= '</html>';
+            return $html;
 
     }
 }
+
 
 
 // create table header
@@ -233,5 +249,22 @@ class printTable{
 
         echo $table;
 
+    }
+}
+
+class helper{
+
+    public static function loopingIt($values ,$tag)
+    {
+        $html = '<html>';
+        foreach($values as $property=>$value2){
+            if($tag==0){
+                $html .= create_table_Header::createHeader($value2);
+            }
+            else {
+                $html .= tableData::printTabledata($value2);
+            }
+        }
+        return $html;
     }
 }
